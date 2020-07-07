@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>끝말잇기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <word-relay first-keyword="하나"></word-relay>
+        <word-relay first-keyword="두울"></word-relay>
+        <word-relay first-keyword="세엣" />
+    </div>
+    <script>
+        Vue.component ('word-relay', {
+            template: `
+            <div>
+                <div>{{keyword}}</div>
+                <form v-on:submit="onSubmit">
+                    <input type="text" ref="input" v-model="input">
+                    <button type="submit">확인</button>
+                </form>
+                <div>{{result}}</div>
+            </div>
+            `,
+            props: ['first-keyword'],
+            data () {
+                return {
+                    keyword: this.firstKeyword,
+                    input: '',
+                    result: ''
+                };
+            },
+            methods: {
+                onSubmit (e) {
+                    e.preventDefault();
+                    if (this.input.length < 2) {
+                        this.input = '';
+                        this.$refs.input.focus();
+                        return this.result = '최소2글자 입력바랍니다.';
+                    }
+                    if (this.keyword[this.keyword.length - 1] === this.input[0]) {
+                        this.result = '콩그레츄~';
+                        this.keyword = this.input;
+                    } else {
+                        this.result = '틀렸답니다~!!!';
+                    }
+                    
+                    this.input = '';
+                    this.$refs.input.focus();
+                }   
+            }
+        });
+    </script>
+    <script>
+        var aa = new Vue({
+            el: '#root'
+        })
+    </script>
+</body>
+</html>

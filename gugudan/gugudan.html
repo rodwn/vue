@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>구구단</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>
+            {{question1}} X {{question2}} ?
+        </div>
+        <p>실시간 입력값: {{input}}</p>
+        <form v-on:submit="send">
+            <input type="number" ref="input" v-model="input">
+            <button type="submit">입력</button>
+        </form>
+        <p id="result">{{result}}</p>
+    </div>
+    <script>
+        const gugudan = new Vue({
+            el: '#root',
+            data: {
+                question1: Math.ceil(Math.random()*9),
+                question2: Math.ceil(Math.random()*9),
+                input: '',
+                result: '',
+                inputElement: document.getElementById('input')
+            },
+            methods: {
+                send (e) {
+                    e.preventDefault();
+                    if (this.question1 * this.question2 === this.input*1) {
+                        this.result = '콩그레츄~';
+                        this.question1 = Math.ceil(Math.random()*9);
+                        this.question2 = Math.ceil(Math.random()*9);
+                    } else {
+                        this.result = '틀렸답니다!!!!!!';
+                    }
+
+                    this.input = '';
+                    this.$refs.input.focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
