@@ -1,5 +1,3 @@
-const { Template } = require("webpack");
-
 <template>
   <div>
     <h1>숫자야구</h1>
