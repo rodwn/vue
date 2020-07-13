@@ -60,6 +60,7 @@ export default {
     padding: 100px 0;
     background-color: #ccc;
     text-align: center;
+    user-select: none;
   }
   #screen.waiting {
     background-color: mint;

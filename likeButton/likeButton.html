@@ -10,9 +10,19 @@
     <div id="root">
         <p v-if="liked">눌림</p>
         <button type="button" v-else v-on:click="onClickButton">Like</button>
+        <my-cmp></my-cmp>
+        <my-cmp2></my-cmp2>
     </div>
     <script>
-        const app = new Vue({
+        Vue.component('my-cmp', {
+            template: `<p>lorem ipsum dolor</p>`
+        });
+        
+        const cmp2 = {
+            template: `<p>my components!!!!!!!!!!!!!!!!!!!!</p>`
+        };
+
+        new Vue({
             el: '#root',
             data: {
                 liked: false,
@@ -20,6 +30,11 @@
             methods: {
                 onClickButton () {
                     this.liked = true;
+                }
+            },
+            components: {
+                'my-cmp2': {
+                    template: `<p>123123123</p>`
                 }
             }
         });
